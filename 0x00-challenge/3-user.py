@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-User Model
+ User Model
 """
 import hashlib
 import uuid
@@ -40,7 +40,7 @@ class User():
         if pwd is None or type(pwd) is not str:
             self.__password = None
         else:
-            self._password = hashlib.md5(pwd.encode()).hexdigest().lower()
+            self.__password = hashlib.md5(pwd.encode()).hexdigest().lower()
 
     def is_valid_password(self, pwd):
         """
@@ -54,7 +54,7 @@ class User():
             return False
         if self.__password is None:
             return False
-        return hashlib.md5(pwd.encode()).hexdigest().upper() == self.__password
+        return hashlib.md5(pwd.encode()).hexdigest().lower() == self.__password
 
 
 if __name__ == '__main__':
@@ -62,53 +62,42 @@ if __name__ == '__main__':
 
     user_1 = User()
     if user_1.id is None:
-        pass
-        #print("New User should have an id")
+        print("New User should have an id")
 
     user_2 = User()
     if user_1.id == user_2.id:
-        pass
-        #print("User.id should be unique")
+        print("User.id should be unique")
 
     u_pwd = "myPassword"
     user_1.password = u_pwd
     if user_1.password == u_pwd:
-        pass
-        #print("User.password should be hashed")
+        print("User.password should be hashed")
 
     if user_2.password is not None:
-        pass
-        #print("User.password should be None by default")
+        print("User.password should be None by default")
 
     user_2.password = None
     if user_2.password is not None:
-        pass
-        #print("User.password should be None if setter to None")
+        print("User.password should be None if setter to None")
 
     user_2.password = 89
     if user_2.password is not None:
-        pass
-        #print("User.password should be None if setter to an integer")
+        print("User.password should be None if setter to an integer")
 
     if not user_1.is_valid_password(u_pwd):
-        pass
-        #print("is_valid_password should return True if it's the right \
-#password")
+        print("is_valid_password should return True if it's the right \
+password")
 
     if user_1.is_valid_password("Fakepwd"):
-        pass
-        #print("is_valid_password should return False if it's not the right \
-#password")
+        print("is_valid_password should return False if it's not the right \
+password")
 
     if user_1.is_valid_password(None):
-        pass
-        #print("is_valid_password should return False if compare with None")
+        print("is_valid_password should return False if compare with None")
 
     if user_1.is_valid_password(89):
-        pass
-        #print("is_valid_password should return False if compare with integer")
+        print("is_valid_password should return False if compare with integer")
 
     if user_2.is_valid_password("No pwd"):
-        pass
-        #print("is_valid_password should return False if no password set \
-#before")
+        print("is_valid_password should return False if no password set \
+before")
